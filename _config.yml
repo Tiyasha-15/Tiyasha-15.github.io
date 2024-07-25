@@ -1,0 +1,44 @@
+# Site settings
+title: Portfolio-wbsite               # The title of your site
+description: >                    # A short description of your site
+  This is my personal portfolio showcasing my work and projects.
+baseurl: ""                       # The subpath of your site (e.g., /blog), leave empty for root
+url: "https://Tiyasha-15.github.io" # The base URL of your site
+
+# Author settings
+author:
+  name: Tiyasha Ghorui
+  email: tiyashaghorui15@gmail.com
+
+# Social media links (optional)
+social:
+  github: https://github.com/Tiyasha-15
+  linkedin: https://www.linkedin.com/in/tiyasha-ghorui/
+
+# Build settings
+markdown: kramdown                # The Markdown parser to use
+theme: minima                     # The Jekyll theme to use
+plugins:                          # Plugins to use
+  - jekyll-feed                   # RSS feed plugin
+
+# Permalinks
+permalink: /:title/               # URL structure for blog posts
+
+# Exclude files or directories from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+# Include specific files or directories in processing
+include:
+  - _pages
+
+# Defaults for posts
+defaults:
+  - scope:
+      path: ""                    # All files
+      type: "posts"               # All posts
+    values:
+      layout: "post"              # Default layout for posts
+      author: "Your Name"
