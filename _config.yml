@@ -1,9 +1,9 @@
 # Site settings
-title: Portfolio-wbsite               # The title of your site
-description: >                    # A short description of your site
+title: Portfolio-website              # The title of your site
+description: >                        # A short description of your site
   This is my personal portfolio showcasing my work and projects.
-baseurl: ""                       # The subpath of your site (e.g., /blog), leave empty for root
-url: "https://Tiyasha-15.github.io" # The base URL of your site
+baseurl: ""                           # The subpath of your site (e.g., /blog), leave empty for root
+url: "https://Portfolio-website.github.io"   # The base URL of your site
 
 # Author settings
 author:
@@ -16,13 +16,13 @@ social:
   linkedin: https://www.linkedin.com/in/tiyasha-ghorui/
 
 # Build settings
-markdown: kramdown                # The Markdown parser to use
-theme: minima                     # The Jekyll theme to use
-plugins:                          # Plugins to use
-  - jekyll-feed                   # RSS feed plugin
+markdown: kramdown                    # The Markdown parser to use
+theme: minima                         # The Jekyll theme to use
+plugins:                              # Plugins to use
+  - jekyll-feed                       # RSS feed plugin
 
 # Permalinks
-permalink: /:title/               # URL structure for blog posts
+permalink: /:title/                   # URL structure for blog posts
 
 # Exclude files or directories from processing
 exclude:
@@ -37,8 +37,8 @@ include:
 # Defaults for posts
 defaults:
   - scope:
-      path: ""                    # All files
-      type: "posts"               # All posts
+      path: ""                        # All files
+      type: "posts"                   # All posts
     values:
-      layout: "post"              # Default layout for posts
-      author: "Your Name"
+      layout: "post"                  # Default layout for posts
+      author: "Tiyasha Ghorui"
