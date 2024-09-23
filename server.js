@@ -1,3 +1,13 @@
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+
+
+const app = express();
+
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 app.post('/send', (req, res) => {
   const { name, email, phone, address, message } = req.body;
 
