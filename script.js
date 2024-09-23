@@ -72,3 +72,62 @@ const scrolltop = document.querySelectorAll(".scroll-top");
 scrolltop.forEach((el)=>observer.observe(el));
 
 //smtp connection//
+const express = require('express');
+const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser');
+const app = express();
+
+// Use body-parser middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Route for handling the form submission
+app.post('/send', (req, res) => {
+    const { name, email, phone, address, message } = req.body;
+
+    // Set up Nodemailer transporter
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'tiyashaghorui15@2gmail.com',  // Replace with your email
+            pass: 'Tiyasha@2002'    // Replace with your email password or use an app password
+        }
+    });
+
+    // Email options
+    let mailOptions = {
+        from: email,  // The sender's email
+        to: 'tiyashaghorui15@gmail.com',  // Replace with your own email to receive messages
+        subject: `New Contact Form Message from ${name}`,
+        text: `You have a new message from your contact form:
+
+        Name: ${name}
+        Email: ${email}
+        Phone: ${phone}
+        Address: ${address}
+
+        Message:
+        ${message}
+        `
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).send('Error sending message.');
+        }
+        console.log('Message sent: %s', info.messageId);
+        res.send('Message sent successfully!');
+    });
+});
+
+// Serve the contact form (optional)
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html'); // Assuming your HTML file is named index.html
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
