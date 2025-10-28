@@ -40,7 +40,7 @@
 
       <div class="btn-box">
         <a href="#Contact" class="btn">Hire Me</a>
-        <a href="https://drive.google.com/file/d/1odV74De5A_P6rsSFTFtKUNOYo3JsRbUk/view?usp=sharing" class="btn">Download CV</a>
+        <a href="https://drive.google.com/file/d/13HY8J4XhSKO1JXD_PhBSZXAMh4Jte50d/view?usp=sharing" class="btn">Download CV</a>
       </div> 
        
       <div class="icons">
@@ -267,17 +267,19 @@
       <div class="main-text scroll-scale">
         <span>ask me question</span>
         <h2>Contact Me</h2>
-        <form action="https://tiyasha-15.github.io/send" method="POST" class="scroll-bottom">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Mail-ID" required>
-          <input type="text" name="address" placeholder="Your Address" required>
-          <input type="tel" name="phone" placeholder="Phone Number" required>
-          <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
-      
-          <div class="btn-box formbtn">
-              <button type="submit" class="btn">Send Message</button>
-          </div>
-      </form>
+        <form action="https://formspree.io/f/xrbopaqv" method="POST" class="scroll-bottom">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Mail-ID" required>
+  <input type="text" name="address" placeholder="Your Address" required>
+  <input type="tel" name="phone" placeholder="Phone Number" required>
+  <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
+
+  <input type="hidden" name="_next" value="https://tiyasha-15.github.io/#Contact">
+
+  <div class="btn-box formbtn">
+    <button type="submit" class="btn">Send Message</button>
+  </div>
+        </form>
       </div>
     </section>
 
@@ -288,6 +290,25 @@
 
       <a href="#Home"><i class='bx bx-up-arrow-alt'></i></a>
     </footer>
+    <script>
+  const form = document.querySelector("form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    });
+
+    if (response.ok) {
+      alert("✅ Thank you! Your message has been sent successfully.");
+      form.reset();
+    } else {
+      alert("❌ Oops! Something went wrong. Please try again later.");
+    }
+  });
+</script>
 
 </body>
 <script src="server.js"></script>

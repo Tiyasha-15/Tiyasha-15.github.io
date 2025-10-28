@@ -1,52 +1,38 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
+// server.js
+import express from "express";
+import cors from "cors";
+import nodemailer from "nodemailer";
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-// Middleware to parse form data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/send", async (req, res) => {
+  const { name, email, address, phone, message } = req.body;
 
-// POST route to handle form submission
-app.post('https://tiyasha-15.github.io/send', (req, res) => {
-    const { name, email, phone, address, message } = req.body;
+  // setup mail transport
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "your_email@gmail.com",
+      pass: "your_app_password"
+    }
+  });
 
+  const mailOptions = {
+    from: email,
+    to: "your_email@gmail.com",
+    subject: `Portfolio Message from ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nAddress: ${address}\nPhone: ${phone}\n\nMessage:\n${message}`
+  };
 
-    let transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'tiyashaghorui15@gmail.com',  
-            pass: 'Tiyasha@2002'    
-        }
-    });
-
-    let mailOptions = {
-        from: email,
-        to: 'tiyashaghorui15@gmail.com',  
-        subject: `New Contact Message from ${name}`,
-        text: `You have a new message from ${name}:
-        
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone}
-        Address: ${address}
-
-        Message:
-        ${message}`
-    };
-
-    // Send the email
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return res.status(500).json({ error: 'Failed to send message' });
-        }
-        res.status(200).json({ success: 'Message sent successfully!' });
-    });
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).send({ success: true, message: "Message sent successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ success: false, message: "Error sending message." });
+  }
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.listen(3000, () => console.log("Server running on port 3000"));
